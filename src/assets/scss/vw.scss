@@ -1,0 +1,75 @@
+$vw-viewport: 750;
+@function vw($target) { 
+  $vw-context: ($vw-viewport*.01) * 1px;
+  @return ($target/$vw-context) * 1vw;
+}
+
+// 公共样式的统一
+$mobileFont: 'Helvetica Neue', Helvetica, STHeiTi, Microsoft YaHei, sans-serif, Microsoft JhengHei, Arial;
+%box-sizing {
+  -webkit-box-sizing:border-box;
+  -moz-box-sizing:border-box;
+  -o-box-sizing:border-box;
+  box-sizing:border-box;
+}
+body, dl, dd, h1, h2, h3, h4, h5, h6, p, form, figure, figcaption {
+  margin:0px;
+}
+*{
+  font-family: $mobileFont;
+}
+/* 改变盒子模型 */
+section, article, nav, aside, footer, header, div, p, ul, li, input, textarea {
+  display: block;
+  @extend %box-sizing;
+}
+
+
+// 绝对居中
+@mixin center($width, $height) {
+  position: absolute;
+  left:50%;
+  top:50%;
+  width:$width;
+  height:$height;
+  margin:(-$height / 2) 0 0 (-$width / 2);
+}
+// 绝对水平居中
+@mixin horizontalCenter($width) {
+  position: absolute;
+  left:50%;
+  width:$width;
+  margin:0 0 0 (-$width / 2);
+}
+// 绝对垂直居中
+@mixin verticalCenter($height) {
+  position: absolute;
+  top:50%;
+  height:$height;
+  margin:(-$height / 2) 0 0 0;
+}
+// 清除浮动
+@mixin clearfix() { 
+  &:before, &:after { 
+    content: ""; 
+    display: table; 
+  } 
+  &:after { 
+    clear: both; 
+  } 
+}
+//多行文字超出显示省略号
+@mixin ellipsisMultiline($number: 1) {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: $number;
+}
+//文字一行超出显示省略号
+@mixin ellipsis () {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
